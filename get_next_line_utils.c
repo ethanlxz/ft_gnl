@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 18:07:50 by etlaw             #+#    #+#             */
-/*   Updated: 2022/11/11 19:49:52 by etlaw            ###   ########.fr       */
+/*   Updated: 2022/11/12 20:32:44 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,30 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (res);
 }
 
-void	*ft_bzero(void *s, size_t n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*str;
 	size_t	i;
+	size_t	len2;
+	char	*subs;
 
 	i = 0;
-	str = (char *)s;
-	while (i < n)
+	if (!s)
+		return (0);
+	len2 = ft_strlen(s);
+	if (len2 < (size_t)start)
+		return (ft_substr("", 0, 0));
+	if (len2 < len)
+		len = len2;
+	subs = (char *)malloc(sizeof(char) * len + 1);
+	if (!subs)
+		return (0);
+	while (i < len)
 	{
-		str[i] = '\0';
+		subs[i] = s[start + i];
 		i++;
 	}
-	return (str);
-}
-
-void	*ft_calloc(size_t elementCount, size_t elementSize)
-{
-	char	*res;
-
-	res = malloc(elementSize * elementCount);
-	if (!res)
-		return (NULL);
-	ft_bzero(res, elementCount * elementSize);
-	return (res);
+	subs[i] = '\0';
+	return (subs);
 }
 
 int	ft_strchr(const char *string, int tofind)
